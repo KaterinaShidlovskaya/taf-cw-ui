@@ -51,6 +51,32 @@ public class CWTest {
         Assertions.assertEquals(expectedMessageText,actualMessageText);
 
     }
+    @Test
+    public void testFillFormWithCorrectMaleData() {
+        WebElement inputName = driver.findElement(By.xpath("//table/tbody/tr[2]/td[2]/input"));
+        inputName.sendKeys("Алекс");
+
+        String inputHeight = "//tbody/tr[3]/td[2]/input";
+        WebElement inputHeighWebElement = driver.findElement(By.xpath(inputHeight));
+        inputHeighWebElement.sendKeys("180");
+
+        String inputWeight = "//tbody/tr[4]/td[2]/input";
+        WebElement inputWeightWebElement = driver.findElement(By.xpath(inputWeight));
+        inputWeightWebElement.sendKeys("80");
+
+        String inputGenderMale = "//table/tbody/tr[5]/td[2]/input[1]";
+        WebElement inputGenderFamaleWebElement = driver.findElement(By.xpath(inputGenderMale));
+        inputGenderFamaleWebElement.click();
+
+        String inputButtonXPath = "//tbody/tr[6]/td/input";
+        WebElement inputButtonWebElement = driver.findElement(By.xpath(inputButtonXPath));
+        inputButtonWebElement.click();
+
+        WebElement actualMassage = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]"));
+        String actualMassageTest = actualMassage.getText();
+
+        Assertions.assertEquals("Идеальная масса тела", actualMassageTest);
+    }
 
     @AfterEach
     public void tearsDown() {
