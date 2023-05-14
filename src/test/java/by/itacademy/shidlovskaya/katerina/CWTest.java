@@ -34,8 +34,8 @@ public class CWTest {
 
     @Test
     public void testFillFormWithoutName() {
-        WebElement inputHeighWebElement = driver.findElement(By.xpath("//tbody/tr[3]/td[2]/input"));
-        inputHeighWebElement.sendKeys("150");
+        WebElement inputHeightWebElement = driver.findElement(By.xpath("//tbody/tr[3]/td[2]/input"));
+        inputHeightWebElement.sendKeys("150");
         WebElement inputWeightWebElement = driver.findElement(By.xpath("//table/tbody/tr[4]/td[2]/input"));
         inputWeightWebElement.sendKeys("50");
         WebElement inputGenderFemaleWebElement = driver.findElement(By.xpath("//table/tbody/tr[5]/td[2]/input[2]"));
@@ -57,8 +57,8 @@ public class CWTest {
         inputName.sendKeys("Алекс");
 
         String inputHeight = "//tbody/tr[3]/td[2]/input";
-        WebElement inputHeighWebElement = driver.findElement(By.xpath(inputHeight));
-        inputHeighWebElement.sendKeys("180");
+        WebElement inputHeightWebElement = driver.findElement(By.xpath(inputHeight));
+        inputHeightWebElement.sendKeys("180");
 
         String inputWeight = "//tbody/tr[4]/td[2]/input";
         WebElement inputWeightWebElement = driver.findElement(By.xpath(inputWeight));
@@ -73,9 +73,30 @@ public class CWTest {
         inputButtonWebElement.click();
 
         WebElement actualMassage = driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[2]"));
-        String actualMassageTest = actualMassage.getText();
+        String actualMassageText = actualMassage.getText();
 
-        Assertions.assertEquals("Идеальная масса тела", actualMassageTest);
+        Assertions.assertEquals("Идеальная масса тела", actualMassageText);
+    }
+    @Test
+    public void testFillFormWithoutGenderData(){
+        WebElement inputNameWebElement = driver.findElement(By.xpath("//input[@name='name']"));
+        inputNameWebElement.sendKeys("Елена");
+
+        WebElement inputHeightWebElement = driver.findElement(By.xpath("//input[@name='height']"));
+        inputHeightWebElement.sendKeys("167");
+
+        WebElement inputWeightWebElement = driver.findElement(By.xpath("//input[@name='weight']"));
+        inputWeightWebElement.sendKeys("65");
+
+        WebElement buttonCalculateWebElement = driver.findElement(By.xpath("//input[@value='Рассчитать']"));
+        buttonCalculateWebElement.click();
+
+        WebElement actualMessageWebElement = driver.findElement(By.xpath("//table/tbody/tr[1]/td/b"));
+        String actualMessage = actualMessageWebElement.getText();
+
+        String expectedMessage = "Не указан пол.";
+
+        Assertions.assertEquals(actualMessage,expectedMessage);
     }
 
     @AfterEach
