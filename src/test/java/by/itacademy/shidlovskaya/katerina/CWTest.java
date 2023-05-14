@@ -23,13 +23,33 @@ public class CWTest {
         String actualMassageXpath = "/html/body/table/tbody/tr[2]/td[2]/form/table/tbody/tr[1]/td/b";
         WebElement actualMassageWebElement = driver.findElement(By.xpath(actualMassageXpath));
 
-        String expectedMassageTest = "Не указано имя.\n" +
+        String expectedMassageText = "Не указано имя.\n" +
                 "Рост должен быть в диапазоне 50-300 см.\n" +
                 "Вес должен быть в диапазоне 3-500 кг.\n" +
                 "Не указан пол.";
-        String actualMassageTest = actualMassageWebElement.getText();
+        String actualMassageText = actualMassageWebElement.getText();
 
-        Assertions.assertEquals(expectedMassageTest, actualMassageTest);
+        Assertions.assertEquals(expectedMassageText, actualMassageText);
+    }
+
+    @Test
+    public void testFillFormWithoutName() {
+        WebElement inputHeighWebElement = driver.findElement(By.xpath("//tbody/tr[3]/td[2]/input"));
+        inputHeighWebElement.sendKeys("150");
+        WebElement inputWeightWebElement = driver.findElement(By.xpath("//table/tbody/tr[4]/td[2]/input"));
+        inputWeightWebElement.sendKeys("50");
+        WebElement inputGenderFemaleWebElement = driver.findElement(By.xpath("//table/tbody/tr[5]/td[2]/input[2]"));
+        inputGenderFemaleWebElement.click();
+        WebElement buttonCalculateWebElement = driver.findElement(By.xpath("//table/tbody/tr[6]/td/input"));
+        buttonCalculateWebElement.click();
+
+       String actualMessageXPath = "/html/body/table/tbody/tr[2]/td[2]/form/table/tbody/tr[1]/td/b";
+        WebElement actualMessageWebElement = driver.findElement(By.xpath(actualMessageXPath));
+        String actualMessageText = actualMessageWebElement.getText();
+        String expectedMessageText = "Не указано имя.";
+
+        Assertions.assertEquals(expectedMessageText,actualMessageText);
+
     }
 
     @AfterEach
